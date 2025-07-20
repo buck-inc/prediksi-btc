@@ -16,7 +16,7 @@ def get_data():
     params = {"symbol": "BTCUSDT", "interval": "1m", "limit": 1000}
     response = requests.get(url, params=params)
     data = response.json()
-    print(data)
+    st.text(data.stringify())
     df = pd.DataFrame(data, columns=["timestamp", "open", "high", "low", "close", "volume",
                                      "_1", "_2", "_3", "_4", "_5", "_6"])
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms").dt.tz_localize("UTC").dt.tz_convert("Asia/Jakarta")
@@ -53,4 +53,4 @@ if len(df) > 0:
     pred = model.predict(last_data)[0]
     st.success(f"🎯 Prediksi Harga Selanjutnya: ${pred:,.2f}")
 else:
-    st.warning("Data terlalu sedikit untuk pelatihan model.")
+    st.warning("Data terlalu sedikit untuk pelatihan model. data length : " + str(len(df)))
