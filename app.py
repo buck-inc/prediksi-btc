@@ -16,7 +16,6 @@ def get_data():
     params = {"symbol": "BTCUSDT", "interval": "1m", "limit": 1000}
     response = requests.get(url, params=params)
     data = response.json()
-    st.text(data.stringify())
     df = pd.DataFrame(data, columns=["timestamp", "open", "high", "low", "close", "volume",
                                      "_1", "_2", "_3", "_4", "_5", "_6"])
     df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms").dt.tz_localize("UTC").dt.tz_convert("Asia/Jakarta")
