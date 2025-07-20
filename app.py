@@ -13,7 +13,7 @@ st.title("📈 Prediksi Harga Crypto (Data Binance/Tokocrypto)")
 @st.cache_data
 def get_data():
     url = "https://api.binance.com/api/v3/klines"
-    params = {"symbol": "BTCUSDT", "interval": "1m", "limit": 1000}
+    params = {"symbol": "BTCUSDT", "interval": "1d", "limit": 1000}
     response = requests.get(url, params=params)
     data = response.json()
     df = pd.DataFrame(data, columns=["timestamp", "open", "high", "low", "close", "volume",
